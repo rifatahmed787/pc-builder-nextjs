@@ -2,18 +2,17 @@ import Head from "next/head";
 import RootLayout from "@/components/Layouts/RootLayout";
 import Banner from "@/components/UI/Banner";
 
-
 const HomePage = () => {
   return (
     <>
       <Head>
-        <title>PH-News Portal</title>
+        <title>PC-Builder</title>
         <meta
           name="description"
           content="This is news portal of programming hero made by next-js"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/vercel.svg" />
       </Head>
       <Banner />
     </>
