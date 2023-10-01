@@ -12,13 +12,13 @@ const ContactPage = () => {
       }}
     >
       <Head>
-        <title>PH_NP-Contact Us</title>
+        <title>Error</title>
         <meta
           name="description"
           content="This is news portal of programming hero made by next-js"
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/vercel.svg" />
       </Head>
       <h1>Developer is sleeping....! Contact Us page coming soon....!</h1>
       <Link href="/">

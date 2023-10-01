@@ -6,13 +6,16 @@ import {
   GoogleSquareFilled,
   TwitterSquareFilled,
 } from "@ant-design/icons";
-import { Layout, Menu } from "antd";
+import { Button, Layout, Menu } from "antd";
 const { Header, Content, Footer } = Layout;
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
 import DropdownMenu from "../UI/Dropdown";
+import { useSession, signOut } from "next-auth/react";
 
 const RootLayout = ({ children }) => {
+  const { data: session } = useSession();
+  console.log(session);
   return (
     <Layout>
       <Header
@@ -47,20 +50,37 @@ const RootLayout = ({ children }) => {
             <DropdownMenu />
           </Link>
 
-          <div>
-            <Link
-              href="/contact"
-              style={{
-                color: "white",
-                backgroundColor: "blue",
-                padding: "5px 10px",
-                borderRadius: "3px",
-              }}
-            >
-              <LoginOutlined style={{ padding: "0px 5px" }} />
-              LogIn
-            </Link>
-          </div>
+          {session?.user ? (
+            <div>
+              <Button
+                style={{
+                  color: "white",
+                  backgroundColor: "blue",
+                  padding: "5px 10px",
+                  borderRadius: "3px",
+                }}
+                onClick={() => signOut()}
+              >
+                <LoginOutlined style={{ padding: "0px 5px" }} />
+                Logout
+              </Button>
+            </div>
+          ) : (
+            <div>
+              <Link
+                href="/login"
+                style={{
+                  color: "white",
+                  backgroundColor: "blue",
+                  padding: "5px 10px",
+                  borderRadius: "3px",
+                }}
+              >
+                <LoginOutlined style={{ padding: "0px 5px" }} />
+                LogIn
+              </Link>
+            </div>
+          )}
 
           <div>
             <Link

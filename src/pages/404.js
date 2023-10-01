@@ -17,7 +17,7 @@ const NotFoundPage = () => {
       <Col span={24}>
         <div style={{ textAlign: "center" }}>
           <Head>
-            <title>PC-Build-404 Not Found</title>
+            <title>Error</title>
             <meta
               name="description"
               content="This is the news portal of programming hero made by Next.js"
@@ -26,7 +26,7 @@ const NotFoundPage = () => {
               name="viewport"
               content="width=device-width, initial-scale=1"
             />
-            <link rel="icon" href="/favicon.ico" />
+            <link rel="icon" href="/vercel.svg" />
           </Head>
           <Image
             src={ErrorImg}
