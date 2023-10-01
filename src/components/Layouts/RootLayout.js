@@ -1,7 +1,6 @@
 import {
-  ProfileOutlined,
-  MobileOutlined,
-  UserOutlined,
+  HomeOutlined,
+  LoginOutlined,
   FacebookFilled,
   LinkedinFilled,
   GoogleSquareFilled,
@@ -11,6 +10,7 @@ import { Layout, Menu } from "antd";
 const { Header, Content, Footer } = Layout;
 import styles from "@/styles/Home.module.css";
 import Link from "next/link";
+import DropdownMenu from "../UI/Dropdown";
 
 const RootLayout = ({ children }) => {
   return (
@@ -19,6 +19,7 @@ const RootLayout = ({ children }) => {
         style={{
           display: "flex",
           justifyContent: "space-between",
+          backgroundColor: "white",
         }}
       >
         <div className="brand-logo">
@@ -27,38 +28,53 @@ const RootLayout = ({ children }) => {
               href="/"
               style={{
                 color: "white",
-                backgroundColor: "#404040",
+                backgroundColor: "blue",
                 padding: "5px 10px",
                 borderRadius: "3px",
               }}
             >
-              PH_NEWS PORTAL
+              PC BUILDER
             </Link>
           </h1>
         </div>
-        <Menu theme="dark" mode="vertical" className={styles.menu_items}>
-          <Link href="/allNews">
-            <items>
-              <ProfileOutlined />
-              All News
-            </items>
+        <Menu theme="white" mode="horizontal" className={styles.menu_items}>
+          <Link href="/" style={{ color: "black" }}>
+            <HomeOutlined style={{ padding: "0px 5px" }} />
+            Home
           </Link>
-          <Link href="/about">
-            <items
+
+          <Link href="/" style={{ margin: "0px 20px" }}>
+            <DropdownMenu />
+          </Link>
+
+          <div>
+            <Link
+              href="/contact"
               style={{
-                margin: "0px 25px",
+                color: "white",
+                backgroundColor: "blue",
+                padding: "5px 10px",
+                borderRadius: "3px",
               }}
             >
-              <UserOutlined />
-              About Us
-            </items>
-          </Link>
-          <Link href="/contact">
-            <items>
-              <MobileOutlined />
-              Contact Us
-            </items>
-          </Link>
+              <LoginOutlined style={{ padding: "0px 5px" }} />
+              LogIn
+            </Link>
+          </div>
+
+          <div>
+            <Link
+              href="/contact"
+              style={{
+                color: "white",
+                backgroundColor: "blue",
+                padding: "5px 10px",
+                borderRadius: "3px",
+              }}
+            >
+              Build PC
+            </Link>
+          </div>
         </Menu>
       </Header>
 
