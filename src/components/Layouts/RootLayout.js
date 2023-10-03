@@ -15,7 +15,7 @@ import { useSession, signOut } from "next-auth/react";
 
 const RootLayout = ({ children }) => {
   const { data: session } = useSession();
-  console.log(session);
+
   return (
     <Layout>
       <Header
@@ -51,7 +51,7 @@ const RootLayout = ({ children }) => {
           </Link>
 
           {session?.user ? (
-            <div>
+            <div style={{ margin: "0px 10px" }}>
               <Button
                 style={{
                   color: "white",
@@ -61,12 +61,12 @@ const RootLayout = ({ children }) => {
                 }}
                 onClick={() => signOut()}
               >
-                <LoginOutlined style={{ padding: "0px 5px" }} />
+                <LoginOutlined style={{ padding: "0px 10px" }} />
                 Logout
               </Button>
             </div>
           ) : (
-            <div>
+            <div style={{ margin: "0px 5px" }}>
               <Link
                 href="/login"
                 style={{
@@ -82,19 +82,35 @@ const RootLayout = ({ children }) => {
             </div>
           )}
 
-          <div>
-            <Link
-              href="/contact"
-              style={{
-                color: "white",
-                backgroundColor: "blue",
-                padding: "5px 10px",
-                borderRadius: "3px",
-              }}
-            >
-              Build PC
-            </Link>
-          </div>
+          {session?.user ? (
+            <div>
+              <Link
+                href="/contact"
+                style={{
+                  color: "white",
+                  backgroundColor: "blue",
+                  padding: "5px 10px",
+                  borderRadius: "3px",
+                }}
+              >
+                Build PC
+              </Link>
+            </div>
+          ) : (
+            <div>
+              <Link
+                href="/login"
+                style={{
+                  color: "white",
+                  backgroundColor: "blue",
+                  padding: "5px 10px",
+                  borderRadius: "3px",
+                }}
+              >
+                Build PC
+              </Link>
+            </div>
+          )}
         </Menu>
       </Header>
 
