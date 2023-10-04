@@ -1,6 +1,18 @@
-import React from "react";
+// Category.js
+
+import React, { useState } from "react";
 import { Col, Row } from "antd";
+import Link from "next/link"; // Import the Link component
+import { useRouter } from "next/router";
+
 const Category = ({ categories }) => {
+  const router = useRouter();
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
   return (
     <>
       <h1
@@ -13,9 +25,9 @@ const Category = ({ categories }) => {
         Featured Product
       </h1>
       <Row>
-        {categories?.map((product) => (
+        {categories?.map((category) => (
           <Col
-            key={product._id}
+            key={category._id}
             xs={{ span: 24 }}
             sm={{ span: 12 }}
             md={{ span: 8 }}
@@ -26,9 +38,16 @@ const Category = ({ categories }) => {
               padding: "20px",
               textAlign: "center",
               border: "1px solid gray",
+              cursor: "pointer",
+              backgroundColor:
+                category.name === selectedCategory ? "#e0e0e0" : "white",
             }}
           >
-            <div>{product.name}</div>
+            <Link href={`/products?category=${category.category}`}>
+              <h1 onClick={() => handleCategoryClick(category.name)}>
+                {category.name}
+              </h1>
+            </Link>
           </Col>
         ))}
       </Row>

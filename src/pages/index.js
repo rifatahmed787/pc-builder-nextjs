@@ -3,7 +3,7 @@ import RootLayout from "@/components/Layouts/RootLayout";
 import Banner from "@/components/UI/Banner";
 import HomeCard from "@/components/UI/HomeCard";
 import Category from "@/components/UI/Category";
-const HomePage = ({ featuredData, category }) => {
+const HomePage = ({ featuredData, category, productData }) => {
   return (
     <>
       <Head>
@@ -18,7 +18,7 @@ const HomePage = ({ featuredData, category }) => {
       <Banner />
 
       <HomeCard featuredData={featuredData} />
-      <Category categories={category} />
+      <Category categories={category} products={productData} />
     </>
   );
 };
@@ -29,8 +29,11 @@ HomePage.getLayout = function getLayout(page) {
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/featured");
+  const res = await fetch("http://localhost:5000/random");
   const data = await res.json();
+
+  const productRes = await fetch("http://localhost:5000/products");
+  const productData = await productRes.json();
 
   const categoryRes = await fetch("http://localhost:5000/category");
   const categoryData = await categoryRes.json();
@@ -38,6 +41,7 @@ export const getStaticProps = async () => {
     props: {
       featuredData: data,
       category: categoryData,
+      product: productData,
     },
     revalidate: 30,
   };

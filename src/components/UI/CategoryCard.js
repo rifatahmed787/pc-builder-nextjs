@@ -2,9 +2,22 @@ import React from "react";
 import { Card, Col, Row } from "antd";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-const HomeCard = ({ featuredData }) => {
+const CategoryCard = ({ products }) => {
   const { Meta } = Card;
+  const router = useRouter();
+  const selectedCategory = router.query.category;
+  console.log(selectedCategory);
+  console.log(products);
+
+  // Filter products based on the selected category
+  const filteredProducts = products.filter(
+    (product) => product.category === selectedCategory
+  );
+
+  console.log(filteredProducts);
+
   return (
     <>
       <h1
@@ -14,11 +27,11 @@ const HomeCard = ({ featuredData }) => {
           margin: "30px 0px",
         }}
       >
-        Featured Product
+        Filter Data
       </h1>
 
       <Row>
-        {featuredData?.map((product) => (
+        {filteredProducts?.map((product) => (
           <Col
             key={product._id}
             xs={{ span: 24 }}
@@ -55,4 +68,4 @@ const HomeCard = ({ featuredData }) => {
   );
 };
 
-export default HomeCard;
+export default CategoryCard;
