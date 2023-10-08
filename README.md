@@ -1,15 +1,19 @@
-## Getting Started
+### PC-Build Platform
 
-Clone This Starter File
+### Live Link:
 
-Then, run 
-```bash
-npm install
-#or
-npm i
+```
+https://pc-builder-nextjs-lac.vercel.app/
+```
 
-After that, run the development server:
+![Alt text](image.png)
 
-```bash
-npm run dev
+### Introduction
 
+Welcome to the PC Builder Frontend! This web application serves as the user
+interface for the PC Building platform, where users can browse and discover
+various PC instruments different categories.
+
+The primary objective of this frontend application is to provide users with a
+seamless and enjoyable experience while exploring the extensive collection of
+PC building instruments available in the PC Build website.

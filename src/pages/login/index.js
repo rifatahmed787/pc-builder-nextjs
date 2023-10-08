@@ -40,7 +40,7 @@ const Login = () => {
             }}
             onClick={() =>
               signIn("google", {
-                callbackUrl: "http://localhost:3000/",
+                callbackUrl: "https://pc-builder-nextjs-lac.vercel.app/",
               })
             }
           />
@@ -52,7 +52,7 @@ const Login = () => {
             }}
             onClick={() =>
               signIn("github", {
-                callbackUrl: "http://localhost:3000/",
+                callbackUrl: "https://pc-builder-nextjs-lac.vercel.app/",
               })
             }
           />
