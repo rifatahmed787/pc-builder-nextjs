@@ -1,6 +1,7 @@
-import { Button } from "antd";
+import { removeAllProduct } from "@/Redux/pcBuild/pcBuildSlice";
+import Button from "@/components/Button";
 import RootLayout from "@/components/RootLayout";
-import { removeAllProduct } from "@/redux/pcBuild/pcBuildSlice";
+
 import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,6 +11,7 @@ import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 
 const PcBuild = ({ data }) => {
+  // const { data, isLoading } = useGetCategoryQuery();
   const router = useRouter();
   const dispatch = useDispatch();
   const { totalPrice, product, buttonState } = useSelector(
@@ -20,7 +22,9 @@ const PcBuild = ({ data }) => {
     router.push("/");
     dispatch(removeAllProduct());
   };
-
+  // if (isLoading) {
+  //     return <h1 className="text-center my-2 font-semibold">Loading....</h1>
+  // }
   return (
     <div className="max-w-5xl mx-auto my-5">
       <Head>
@@ -41,7 +45,7 @@ const PcBuild = ({ data }) => {
                 <div key={i}>
                   {product.category === category.name ? (
                     <div className="flex mt-3 items-center">
-                      <Image width={12} src={product.image} alt="" />
+                      <img className="w-12 mr-2" src={product.image} alt="" />
                       <h1>{product.productName}</h1>
                     </div>
                   ) : null}
@@ -54,9 +58,15 @@ const PcBuild = ({ data }) => {
           </div>
         </div>
       ))}
-      <Button type="primary" onClick={handleSubmit} disabled={!buttonState}>
+      <button
+        onClick={handleSubmit}
+        className={`${
+          buttonState ? "bg-[#4361ee] hover:bg-gray-600" : " bg-gray-600"
+        }  px-10 ml-3 mt-5 py-2 rounded-md text-white mr-3  duration-300`}
+        disabled={!buttonState}
+      >
         Complete Build
-      </Button>
+      </button>
     </div>
   );
 };
@@ -64,7 +74,9 @@ const PcBuild = ({ data }) => {
 export default PcBuild;
 
 export const getServerSideProps = async () => {
-  const res = await fetch("http://localhost:5000/category");
+  const res = await fetch(
+    "https://building-pc.vercel.app/api/v1/category/categorys"
+  );
   const data = await res.json();
   return {
     props: {

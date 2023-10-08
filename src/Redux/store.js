@@ -1,6 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { apiSlice } from "@/Redux/api/apiSlice";
-import pcBuildReducer from "./buildPc/buildpcSlice";
+
+import pcBuildReducer from "./pcBuild/pcBuildSlice";
+import { apiSlice } from "./api/apiSlice";
 export const store = configureStore({
   reducer: {
     pcBuild: pcBuildReducer,

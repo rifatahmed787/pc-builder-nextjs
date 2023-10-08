@@ -8,15 +8,11 @@ const CategoryCard = ({ products }) => {
   const { Meta } = Card;
   const router = useRouter();
   const selectedCategory = router.query.category;
-  console.log(selectedCategory);
-  console.log(products);
 
   // Filter products based on the selected category
-  const filteredProducts = products.filter(
+  const filteredProducts = products?.filter(
     (product) => product.category === selectedCategory
   );
-
-  console.log(filteredProducts);
 
   return (
     <>
@@ -41,7 +37,7 @@ const CategoryCard = ({ products }) => {
             xl={{ span: 8 }}
             style={{ marginBottom: "20px", padding: "20px" }}
           >
-            <Link href={`/products/${product._id}`}>
+            <Link href={`/products/${product?._id}`}>
               <Card
                 hoverable
                 style={{ width: "100%" }}

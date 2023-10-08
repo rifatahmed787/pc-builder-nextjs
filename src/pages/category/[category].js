@@ -1,8 +1,7 @@
 import Card from "@/components/Card";
 import RootLayout from "@/components/RootLayout";
-import { useGetProductsQuery } from "@/redux/product/productApi";
+import { useGetProductsQuery } from "@/Redux/product/productApi";
 import Head from "next/head";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import React from "react";
 
@@ -25,7 +24,9 @@ const Category = ({ data }) => {
 export default Category;
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:5000/category");
+  const res = await fetch(
+    "https://building-pc.vercel.app/api/v1/category/categorys"
+  );
   const categorys = await res.json();
 
   const paths = categorys?.data.map((category) => ({
@@ -37,7 +38,9 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (contex) => {
   const { params } = contex;
 
-  const res = await fetch(`http://localhost:5000/featured/${params.category}`);
+  const res = await fetch(
+    `https://building-pc.vercel.app/api/v1/product/category-products/${params.category}`
+  );
   const data = await res.json();
 
   return {

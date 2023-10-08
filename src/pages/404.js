@@ -1,46 +1,11 @@
-import ErrorImg from "@/assets/images/404_Error_Page.png";
-import Image from "next/image";
-import { Button, Row, Col } from "antd";
-import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
+import React from 'react';
 
-const NotFoundPage = () => {
-  const router = useRouter();
-
-  setTimeout(() => {
-    router.push("/");
-  }, 3000);
-
-  return (
-    <Row justify="center" align="middle" style={{ minHeight: "100vh" }} height>
-      <Col span={24}>
-        <div style={{ textAlign: "center" }}>
-          <Head>
-            <title>Error</title>
-            <meta
-              name="description"
-              content="This is the news portal of programming hero made by Next.js"
-            />
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1"
-            />
-            <link rel="icon" href="/vercel.svg" />
-          </Head>
-          <Image
-            src={ErrorImg}
-            width={300}
-            alt="error_image"
-            style={{ display: "flex", margin: "50px auto" }}
-          />
-          <Link href="/">
-            <Button>Back To Home</Button>
-          </Link>
+const ErrorPage = () => {
+    return (
+        <div className='h-[100vh] flex justify-center items-center'>
+            <h1 className='text-5xl font-semibold'><span className='text-7xl'>404</span> Error Page</h1>
         </div>
-      </Col>
-    </Row>
-  );
+    );
 };
 
-export default NotFoundPage;
+export default ErrorPage;

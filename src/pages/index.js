@@ -1,48 +1,46 @@
+import FeaturedCategory from "@/components/FeaturedCategory";
+import FeaturedProduct from "@/components/FeaturedProduct";
+import RootLayout from "@/components/RootLayout";
 import Head from "next/head";
-import RootLayout from "@/components/Layouts/RootLayout";
-import Banner from "@/components/UI/Banner";
-import HomeCard from "@/components/UI/HomeCard";
-import Category from "@/components/UI/Category";
-const HomePage = ({ featuredData, category, productData }) => {
+import banner from "../assets/images/banner-images/banner.png";
+import Image from "next/image";
+
+export default function Home({ data, category }) {
   return (
-    <>
+    <div>
       <Head>
-        <title>PC-Builder</title>
-        <meta
-          name="description"
-          content="This is news portal of programming hero made by next-js"
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/vercel.svg" />
+        <title>Build PC</title>
       </Head>
-      <Banner />
-
-      <HomeCard featuredData={featuredData} />
-      <Category categories={category} products={productData} />
-    </>
+      <Image
+        width={undefined}
+        height={undefined}
+        className="w-full  md:h-[500px]"
+        src={banner}
+        alt=""
+      />
+      <FeaturedProduct data={data} />
+      <FeaturedCategory data={category} />
+    </div>
   );
-};
-export default HomePage;
+}
 
-HomePage.getLayout = function getLayout(page) {
+Home.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
 export const getStaticProps = async () => {
-  const res = await fetch("http://localhost:5000/random");
+  const res = await fetch(
+    "https://building-pc.vercel.app/api/v1/product/random-products"
+  );
   const data = await res.json();
-
-  const productRes = await fetch("http://localhost:5000/products");
-  const productData = await productRes.json();
-
-  const categoryRes = await fetch("http://localhost:5000/category");
-  const categoryData = await categoryRes.json();
+  const response = await fetch(
+    "https://building-pc.vercel.app/api/v1/category/categorys"
+  );
+  const category = await response.json();
   return {
     props: {
-      featuredData: data,
-      category: categoryData,
-      product: productData,
+      data,
+      category,
     },
-    revalidate: 30,
   };
 };

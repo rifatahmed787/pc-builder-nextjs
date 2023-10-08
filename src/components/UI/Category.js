@@ -3,10 +3,8 @@
 import React, { useState } from "react";
 import { Col, Row } from "antd";
 import Link from "next/link"; // Import the Link component
-import { useRouter } from "next/router";
 
 const Category = ({ categories }) => {
-  const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState(null);
 
   const handleCategoryClick = (category) => {

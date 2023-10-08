@@ -1,4 +1,5 @@
 import RootLayout from "@/components/RootLayout";
+import { useGetSingleProductQuery } from "@/Redux/product/productApi";
 import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
@@ -7,11 +8,14 @@ import React from "react";
 const ProductDetails = ({ data }) => {
   const router = useRouter();
   const id = router.query?.productId;
-
+  // const { data, isLoading } = useGetSingleProductQuery(id);
+  // if (isLoading) {
+  //     return <h1 className="text-center my-2 font-semibold">Loading...</h1>
+  // }
   const {
-    features,
+    keyFeatures,
     image,
-    name,
+    productName,
     reviews,
     category,
     price,
@@ -26,10 +30,10 @@ const ProductDetails = ({ data }) => {
       <Head>
         <title>Build PC</title>
       </Head>
-      <Image width={300} height={400} src={image} alt="" />
+      <img className="w-full md:h-[500px]" src={image} alt="" />
       <div className="flex flex-col md:flex-row justify-between">
         <div className="font-semibold mt-3">
-          <h1 className="mt-2">Name: {name}</h1>
+          <h1 className="mt-2">Name: {productName}</h1>
           <h1 className="mt-2">Category: {category}</h1>
           <h1 className="mt-2">Price: $ {price}</h1>
           <h1 className="mt-2">
@@ -46,6 +50,21 @@ const ProductDetails = ({ data }) => {
           <h1 className="mt-2">Indivisual Rating: {indivisualRating}</h1>
         </div>
         <div className="font-semibold mt-3">
+          <h1 className="mt-2">Brand: {keyFeatures?.brand}</h1>
+          <h1 className="mt-2">Model: {keyFeatures?.model}</h1>
+          <h1 className="mt-2">Specification: {keyFeatures.specification}</h1>
+          {keyFeatures?.sockettype && (
+            <h1 className="mt-2">Socket Type: {keyFeatures?.sockettype}</h1>
+          )}
+          {keyFeatures.tdp && <h1 className="mt-2">TDP: {keyFeatures.tdp}</h1>}
+          {keyFeatures.ramSlots && (
+            <h1 className="mt-2">RAM Slots: {keyFeatures.ramSlots}</h1>
+          )}
+
+          {keyFeatures.type && (
+            <h1 className="mt-2">Type: {keyFeatures.type}</h1>
+          )}
+
           <h1 className="mt-2">Description: {description}</h1>
         </div>
       </div>
@@ -70,7 +89,9 @@ const ProductDetails = ({ data }) => {
 export default ProductDetails;
 
 export const getStaticPaths = async () => {
-  const res = await fetch("http://localhost:5000/products");
+  const res = await fetch(
+    "https://building-pc.vercel.app/api/v1/product/products"
+  );
   const products = await res.json();
 
   const paths = products?.data.map((product) => ({
@@ -82,7 +103,9 @@ export const getStaticPaths = async () => {
 export const getStaticProps = async (contex) => {
   const { params } = contex;
 
-  const res = await fetch(`http://localhost:5000/products/${params.productId}`);
+  const res = await fetch(
+    `https://building-pc.vercel.app/api/v1/product/single-product/${params.productId}`
+  );
   const data = await res.json();
 
   return {
